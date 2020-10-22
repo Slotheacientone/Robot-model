@@ -8,7 +8,8 @@ import jgl.GLCanvas;
 
 public class robot extends GLCanvas {
 
-    private static int shoulder = 0, elbow = 0, body = 0, waist=0, knee=0;
+    private static int shoulder = 0, elbow = 0, body = 0, waist = 0, knee = 0;
+    private boolean reverse = false;
 
     private void myinit() {
         myGL.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -19,7 +20,7 @@ public class robot extends GLCanvas {
         myGL.glClear(GL.GL_COLOR_BUFFER_BIT);
 // Body
         myGL.glPushMatrix();
-        myGL.glTranslatef(0.0f, -2.5f, 0.0f);
+        myGL.glTranslatef(0.0f, -2.5f, -3.0f);
         myGL.glRotatef((float) body, 1.0f, 0.0f, 0.0f);
         myGL.glTranslatef(0.0f, 2.5f, 0.0f);
         myGL.glPushMatrix();
@@ -29,21 +30,24 @@ public class robot extends GLCanvas {
 
 // Right Arm
         myGL.glPushMatrix();
-        myGL.glTranslatef(1.0f, 1.0f, 0.0f);
+        myGL.glTranslatef(1.0f, 1.5f, 0.0f);
         myGL.glRotatef((float) shoulder, 0.0f, 0.0f, 1.0f);
         myGL.glTranslatef(1.0f, 0.0f, 0.0f);
         myGL.glPushMatrix();
-        myGL.glScalef(2.0f, 0.4f, 1.0f);
+        myGL.glScalef(2.0f, 0.7f, 0.7f);
         myUT.glutWireCube(1.0);
         myGL.glPopMatrix();
 
         myGL.glTranslatef(1.0f, 0.0f, 0.0f);
-        myGL.glRotatef((float) elbow, 0.0f, 0.0f, 1.0f);
+        myGL.glRotatef((float) -elbow, 0.0f, 0.0f, 1.0f);
         myGL.glTranslatef(1.0f, 0.0f, 0.0f);
         myGL.glPushMatrix();
-        myGL.glScalef(2.0f, 0.4f, 1.0f);
+        myGL.glScalef(2.0f, 0.7f, 0.7f);
         myUT.glutWireCube(1.0);
         myGL.glPopMatrix();
+
+        myGL.glTranslatef(1.4f, 0.0f, 0.0f);
+        myUT.glutWireSphere(0.4, 10, 8);
 
         myGL.glPopMatrix();
         myGL.glFlush();
@@ -51,11 +55,11 @@ public class robot extends GLCanvas {
 
 // Left Arm
         myGL.glPushMatrix();
-        myGL.glTranslatef(-1.0f, 1.0f, 0.0f);
+        myGL.glTranslatef(-1.0f, 1.5f, 0.0f);
         myGL.glRotatef((float) -shoulder, 0.0f, 0.0f, 1.0f);
         myGL.glTranslatef(-1.0f, 0.0f, 0.0f);
         myGL.glPushMatrix();
-        myGL.glScalef(2.0f, 0.4f, 1.0f);
+        myGL.glScalef(2.0f, 0.7f, 0.7f);
         myUT.glutWireCube(1.0);
         myGL.glPopMatrix();
 
@@ -63,36 +67,83 @@ public class robot extends GLCanvas {
         myGL.glRotatef((float) elbow, 0.0f, 0.0f, 1.0f);
         myGL.glTranslatef(-1.0f, 0.0f, 0.0f);
         myGL.glPushMatrix();
-        myGL.glScalef(2.0f, 0.4f, 1.0f);
+        myGL.glScalef(2.0f, 0.7f, 0.7f);
         myUT.glutWireCube(1.0);
         myGL.glPopMatrix();
+
+        myGL.glTranslatef(-1.4f, 0.0f, 0.0f);
+        myUT.glutWireSphere(0.4, 10, 8);
 
         myGL.glPopMatrix();
         myGL.glFlush();
 // End Left Arm
 
-// Right Foot
-
-// End Right Foot
-
-// Left Foot
-
-// End Left Foot
-
 // Head
-
+        myGL.glTranslatef(0.0f, 2.9f, 0.0f);
+        myGL.glRotatef(90f, 0.0f, 1.0f, 0.0f);
+        myUT.glutWireSphere(0.8, 20, 16);
 // End Head
 
         myGL.glPopMatrix();
         myGL.glFlush();
 //End Body
+
+// Right Foot
+        myGL.glPushMatrix();
+        myGL.glTranslatef(0.8f, -2.5f, -3.0f);
+        myGL.glRotatef((float) -waist, 1.0f, 0.0f, 0.0f);
+        myGL.glTranslatef(0.0f, -1.0f, 0.0f);
+        myGL.glPushMatrix();
+        myGL.glScalef(0.7f, 2.0f, 0.7f);
+        myUT.glutWireCube(1.0);
+        myGL.glPopMatrix();
+
+        myGL.glTranslatef(0.0f, -1.0f, 0.0f);
+        myGL.glRotatef((float) knee, 1.0f, 0.0f, 0.0f);
+        myGL.glTranslatef(0.0f, -1.0f, 0.0f);
+        myGL.glPushMatrix();
+        myGL.glScalef(0.7f, 2.0f, 0.7f);
+        myUT.glutWireCube(1.0);
+        myGL.glPopMatrix();
+
+        myGL.glTranslatef(0.0f, -1.4f, 0.0f);
+        myUT.glutWireSphere(0.4, 10, 8);
+
+        myGL.glPopMatrix();
+        myGL.glFlush();
+// End Right Foot
+
+// Left Foot
+        myGL.glPushMatrix();
+        myGL.glTranslatef(-0.8f, -2.5f, -3.0f);
+        myGL.glRotatef((float) -waist, 1.0f, 0.0f, 0.0f);
+        myGL.glTranslatef(0.0f, -1.0f, 0.0f);
+        myGL.glPushMatrix();
+        myGL.glScalef(0.7f, 2.0f, 0.7f);
+        myUT.glutWireCube(1.0);
+        myGL.glPopMatrix();
+
+        myGL.glTranslatef(0.0f, -1.0f, 0.0f);
+        myGL.glRotatef((float)knee, 1.0f, 0.0f, 0.0f);
+        myGL.glTranslatef(0.0f, -1.0f, 0.0f);
+        myGL.glPushMatrix();
+        myGL.glScalef(0.7f, 2.0f, 0.7f);
+        myUT.glutWireCube(1.0);
+        myGL.glPopMatrix();
+
+        myGL.glTranslatef(0.0f, -1.4f, 0.0f);
+        myUT.glutWireSphere(0.4, 10, 8);
+
+        myGL.glPopMatrix();
+        myGL.glFlush();
+// End Left Foot
     }
 
     public void myReshape(int w, int h) {
         myGL.glViewport(0, 0, w, h);
         myGL.glMatrixMode(GL.GL_PROJECTION);
         myGL.glLoadIdentity();
-        myGLU.gluPerspective(90.0, (double) w / (double) h, 1.0, 20.0);
+        myGLU.gluPerspective(100.0, (double) w / (double) h, 1.0, 20.0);
         myGL.glMatrixMode(GL.GL_MODELVIEW);
         myGL.glLoadIdentity();
         myGL.glTranslatef(0.0f, 0.0f, -5.0f);
@@ -119,6 +170,40 @@ public class robot extends GLCanvas {
                 break;
             case 'r':
                 body = (body + 5) % 360;
+                myUT.glutPostRedisplay();
+                break;
+            case 'q':
+                waist = (waist + 5) % 360;
+                myUT.glutPostRedisplay();
+                break;
+            case 'Q':
+                waist = (waist - 5) % 360;
+                myUT.glutPostRedisplay();
+                break;
+            case 't':
+                knee = (knee + 5) % 360;
+                myUT.glutPostRedisplay();
+                break;
+            case 'T':
+                knee = (knee - 5) % 360;
+                myUT.glutPostRedisplay();
+                break;
+            case 'w':
+                if (!reverse) {
+                    body = (body + 3) % 360;
+                    elbow = (elbow + 3) % 360;
+                    shoulder = (shoulder - 3) % 360;
+                }else {
+                    body = (body - 3) % 360;
+                    elbow = (elbow - 3) % 360;
+                    shoulder = (shoulder + 3) % 360;
+                }
+                if(body>=(120%360)){
+                    reverse = true;
+                }
+                if(body<=0){
+                    reverse = false;
+                }
                 myUT.glutPostRedisplay();
                 break;
             case 27:
